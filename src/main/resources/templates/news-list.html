@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>新闻列表</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>新闻列表</h1>
+    <a href="/news/add" class="btn-add">添加新闻</a>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>标题</th>
+            <th>作者</th>
+            <th>访问量</th>
+            <th>操作</th>
+        </tr>
+        <tr th:each="news : ${newsList}">
+            <td th:text="${news.id}"></td>
+            <td><a th:href="@{/news/view/{id}(id=${news.id})}" th:text="${news.newsTitle}"></a></td>
+            <td th:text="${news.author} ?: '匿名'"></td>
+            <td th:text="${news.visitCount}"></td>
+            <td>
+                <a th:href="@{/news/edit/{id}(id=${news.id})}" class="btn-edit">编辑</a>
+                <a th:href="@{/news/delete/{id}(id=${news.id})}" class="btn-delete" onclick="return confirm('确定删除吗？')">删除</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
